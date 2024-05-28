@@ -1,0 +1,57 @@
+
+<title><%= titulo %></title>
+<link rel="stylesheet" href="../public/css/styles.css">
+<body>
+    <%- include('../views/components/header/header') %>
+    <div class="container">
+        <div>
+            <p>Pesquisar restaunte</p>
+        </div>
+
+        <div class="containerCategoria">
+            <div>
+                Todos
+            </div>
+            <div>
+                Hamburgueria
+            </div>
+            <div>
+                Pizza
+            </div>
+        </div>
+        <h2>Todos os restaurantes</h2>
+        <div class="containerRestaurantes">
+            <div>
+                Restaurante 1
+            </div>
+            <div>
+                Restaurante 1
+            </div>
+            <div>
+                Restaurante 1
+            </div>
+        </div>
+    </div> 
+    
+</body>
+<style>
+    .container{
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-fixo);
+        gap: 20px;
+    }
+    .containerCategoria{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .containerRestaurantes{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+    }
+</style>
+</html>
