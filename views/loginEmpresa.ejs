@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <title>Login Empresa</title>
+</head>
+<body>
+    <h2>Login Empresa</h2>
+    <form id="loginFormE">
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Entrar</button>
+    </form>
+</body>
+</html>
+<script>
+    document.getElementById('loginFormE').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await axios.post('/loginEmpresa', { email, password });
+        if (response.data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso',
+                text: 'Login realizado com sucesso!'
+            }).then(() => {
+                window.location.href = '/homeEmpresa'; // Redireciona para o dashboard após o login bem-sucedido
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: response.data.error
+            });
+        }
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: error.response ? error.response.data.error : 'Erro ao fazer login.'
+        });
+    }
+});
+
+</script>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+    <%- include('../views/components/header/header') %>
+    <h2>Cadastro</h2>
+    <div class="forms">
+        <form id="registerForm">
+            <div>
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <label for="cnpj">CNPJ</label>
+                <input type="text" id="cnpj" name="cnpj" required>
+            </div>
+            <div>
+                <label for="endereco">Endereço</label>
+                <input type="text" id="endereco" name="endereco" required>
+            </div>
+            <div>
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" required>
+            </div>
+            <div>
+                <label for="numero">Número</label>
+                <input type="text" id="numero" name="numero" required>
+            </div>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <div>
+            <a href="/login">Já tem uma conta? Faça login</a>
+        </div>
+        <div>
+            <a href="/loginEmpresa">Login conta empresa?</a>
+        </div>
+        <div>
+            <a href="/registerEmpresa">Cadastro conta empresa?</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const cnpj = document.getElementById('cnpj').value;
+            const endereco = document.getElementById('endereco').value;
+            const cep = document.getElementById('cep').value;
+            const numero = document.getElementById('numero').value;
+
+            try {
+                const response = await axios.post('/registerEmpresa', { name, email, password, cnpj, endereco, cep, numero });
+                if (response.data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso',
+                        text: 'Cadastro realizado com sucesso!'
+                    }).then(() => {
+                        window.location.href = '/loginEmpresa'; // Redireciona para o login após o cadastro bem-sucedido
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: response.data.error
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    text: error.response ? error.response.data.error : 'Erro ao fazer cadastro.'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        h2 {
+            padding: var(--padding-fixo);
+            text-align: center;
+        }
+        .forms {
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+        }
+    </style>
+</body>
+</html>

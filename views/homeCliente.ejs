@@ -1,6 +1,10 @@
-
-<title><%= titulo %></title>
-
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
     <%- include('../views/components/header/header') %>
     <div class="container">
@@ -21,15 +25,17 @@
         </div>
         <h2>Todos os restaurantes</h2>
         <div class="containerRestaurantes">
-            <div>
-                Restaurante 1
-            </div>
-            <div>
-                Restaurante 1
-            </div>
-            <div>
-                Restaurante 1
-            </div>
+            <% if (empresas && empresas.length > 0) { %>
+                <% empresas.forEach(empresa => { %>
+                    <div>
+                        <a href="/empresa/<%= empresa.id %>">
+                            <p><%= empresa.name %></p> <!-- Supondo que a coluna de nome da empresa é 'name' -->
+                        </a>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>Nenhum restaurante encontrado.</p>
+            <% } %>
         </div>
     </div> 
     
@@ -54,4 +60,6 @@
 
     }
 </style>
+    <a href="/logout">Sair</a>
+</body>
 </html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Empresa</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+    <%- include('../views/components/header/headerEmpresa') %>
+    <h2>Bem-vindo, Empresa</h2>
+    <p>Cadastre um novo produto</p>
+    <form id="productForm">
+        <div>
+            <label for="name">Nome do Produto</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="description">Descrição</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <div>
+            <label for="preco">Preço</label>
+            <input type="number" id="preco" name="preco" step="0.01" required>
+        </div>
+        <button type="submit">Cadastrar Produto</button>
+    </form>
+    <a href="/logout">Sair</a>
+
+    <script>
+        document.getElementById('productForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const preco = document.getElementById('preco').value;
+
+            try {
+                const response = await axios.post('/registerProduct', { name, description, preco });
+                if (response.data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso',
+                        text: response.data.message
+                    }).then(() => {
+                        document.getElementById('productForm').reset(); // Limpa o formulário após cadastro bem-sucedido
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: response.data.error
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    text: error.response ? error.response.data.error : 'Erro ao cadastrar produto.'
+                });
+            }
+        });
+    </script>
+</body>
+</html>

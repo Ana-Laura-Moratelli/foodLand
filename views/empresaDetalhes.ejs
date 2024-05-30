@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Restaurante</title>
+</head>
+<body>
+    <%- include('../views/components/header/header') %>
+    <div class="container">
+        <h1><%= empresa.name %></h1>
+        <p><%= empresa.cep %></p>
+        <p>Endereço: <%= empresa.endereco %></p> <!-- Supondo que você tenha uma coluna 'address' -->
+        <p>Contato: <%= empresa.numero %></p> <!-- Supondo que você tenha uma coluna 'contact' -->
+        <!-- Adicione outros detalhes necessários aqui -->
+        <h2>Produtos</h2>
+        <div class="containerProdutos">
+            <% if (produtos && produtos.length > 0) { %>
+                <% produtos.forEach(produto => { %>
+                    <div class="produto">
+                        <h3><%= produto.name %></h3>
+                        <p><%= produto.description %></p>
+                        <p>Preço: R$<%= produto.preco %></p>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>Nenhum produto encontrado.</p>
+            <% } %>
+        </div>
+        <a href="/homeCliente">Voltar para a lista de restaurantes</a>
+    </div> 
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            padding: var(--padding-fixo);
+            gap: 20px;
+        }
+    </style>
+</body>
+</html>

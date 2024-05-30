@@ -1,23 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
-  <h1>Login</h1>
-  <form action="/login" method="POST">
-    <div>
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+    <%- include('../views/components/header/header') %>
+    <h2>Login</h2>
+    <div class="forms">
+        <form id="loginForm">
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+        <a href="/register">Não tem uma conta? Cadastre-se</a>
     </div>
-    <div>
-      <label for="password">Senha</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-    <button type="submit">Entrar</button>
-  </form>
-  <a href="/register">Não tem uma conta? Cadastre-se</a>
 </body>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await axios.post('/login', { email, password });
+            if (response.data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso',
+                    text: 'Login realizado com sucesso!'
+                }).then(() => {
+                    window.location.href = '/homeCliente';
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    text: response.data.error
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: error.response ? error.response.data.error : 'Erro ao fazer login.'
+            });
+        }
+    });
+</script>
+<style>
+    h2 {
+        padding: var(--padding-fixo);
+        text-align: center;
+    }
+    .forms {
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+</style>
 </html>
