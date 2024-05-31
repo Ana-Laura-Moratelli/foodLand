@@ -4,6 +4,7 @@ const sequelize = require('../config/database');
 const User = require('./user');
 const Empresa = require('./empresa');
 
+
 const Pedido = sequelize.define('Pedido', {
     id: {
         type: DataTypes.INTEGER,
@@ -29,5 +30,6 @@ const Pedido = sequelize.define('Pedido', {
 
 Pedido.belongsTo(User, { foreignKey: 'userId' });
 Pedido.belongsTo(Empresa, { foreignKey: 'empresaId' });
+
 
 module.exports = Pedido;

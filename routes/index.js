@@ -56,6 +56,37 @@ router.post("/favoritos/delete/:empresaId", async (req, res) => {
       .json({ success: false, error: "Erro ao excluir empresa dos favoritos." });
   }
 });
+router.get('/meusProdutos', async (req, res) => {
+  const empresaId = req.session.empresaId; // Assume que a ID da empresa está na sessão
+  try {
+    const empresa = await Empresa.findByPk(empresaId, {
+      include: Produto
+    });
+    res.render('meusProdutos', { empresa, produtos: empresa.Produtos });
+  } catch (error) {
+    console.error("Erro ao obter produtos:", error);
+    res.status(500).json({ success: false, error: "Erro ao obter produtos." });
+  }
+});
+
+router.get('/pedidoClientes', async (req, res) => {
+  const empresaId = req.session.empresaId; // Assumindo que você está armazenando o ID da empresa na sessão
+  try {
+      const pedidos = await Pedido.findAll({
+          where: { empresaId },
+          include: [
+              { model: User, attributes: ['name', 'email'] },
+              { model: Empresa, attributes: ['name'] }
+          ]
+      });
+      res.render('pedidoClientes', { pedidos });
+  } catch (error) {
+      console.error('Erro ao obter pedidos:', error);
+      res.status(500).json({ success: false, error: 'Erro ao obter pedidos.' });
+  }
+});
+
+
 
 
 router.post("/carrinho/enviar-pedido", async (req, res) => {

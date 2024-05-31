@@ -1,0 +1,36 @@
+<!-- views/meusPedidosEmpresa.ejs -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos de Clientes</title>
+</head>
+<body>
+    <%- include('../views/components/header/headerEmpresa') %>
+    <div class="container">
+        <h2>Pedidos de Clientes</h2>
+        <% if (pedidos && pedidos.length > 0) { %>
+            <ul>
+                <% pedidos.forEach(pedido => { %>
+                    <li>
+                        <h3>Pedido #<%= pedido.id %></h3>
+                        <p>Cliente: <%= pedido.User.name %> (<%= pedido.User.email %>)</p>
+                        <p>Total: R$<%= pedido.total %></p>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>Nenhum pedido encontrado.</p>
+        <% } %>
+    </div>
+</body>
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-fixo);
+        gap: 20px;
+    }
+</style>
+</html>
