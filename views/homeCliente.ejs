@@ -2,26 +2,66 @@
 <body>
     <%- include('../views/components/header/headerCliente') %>
     <div class="container">
+        <h1>Nossas Categorias</h1>
         <div class="containerCategoria">
-            <div>
-                Todos
+          
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    local_cafe
+                    </span>
+                Cafeterias
             </div>
-            <div>
-                Hamburgueria
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    lunch_dining
+                    </span>
+                Hamburguerias
             </div>
-            <div>
-                Pizza
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    local_pizza
+                    </span>
+                Pizzas
+            </div>
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    local_bar
+                    </span>
+                Bebidas
+            </div>
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    icecream
+                    </span>
+                Sorvetes
+            </div>
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    breakfast_dining
+                    </span>
+                Padarias
+            </div>
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    dinner_dining
+                    </span>
+                Restaurantes
             </div>
         </div>
         <h2>Todos os restaurantes</h2>
         <div class="containerRestaurantes">
             <% if (empresas && empresas.length > 0) { %>
                 <% empresas.forEach(empresa => { %>
-                    <div>
-                        <a href="/empresa/<%= empresa.id %>">
-                            <p><%= empresa.name %></p> <!-- Supondo que a coluna de nome da empresa é 'name' -->
-                        </a>
+                    <a href="/empresa/<%= empresa.id %>">
+                    <div class="empresa">
+                        
+                            <p><%= empresa.name %></p>
+                            <p>Enrereço: <%= empresa.endereco %></p>
+                            <p>Número: <%= empresa.numero %></p>
+                            <p>Cep: <%= empresa.cep %></p>
+        
                     </div>
+                </a>
                 <% }) %>
             <% } else { %>
                 <p>Nenhum restaurante encontrado.</p>

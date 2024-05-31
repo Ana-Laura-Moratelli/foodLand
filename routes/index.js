@@ -8,7 +8,7 @@ router.post('/favoritos/adicionar', async (req, res) => {
       // Verificar se o restaurante já está nos favoritos do usuário
       const favoritoExistente = await FavoritaEmpresa.findOne({ where: { userId, empresaId } });
       if (favoritoExistente) {
-          return res.status(400).json({ success: false, error: 'Restaurante já está nos favoritos.' });
+          return res.status(400).json({ success: false, error: 'Restaurante já está nos favoritos.', alreadyAdded: true });
       }
 
       // Adicionar restaurante aos favoritos
@@ -19,9 +19,10 @@ router.post('/favoritos/adicionar', async (req, res) => {
       res.status(500).json({ success: false, error: 'Erro ao adicionar restaurante aos favoritos.' });
   }
 });
+
 // Rota para renderizar a página de login
-app.get('/login', (req, res) => {
-  res.render('login');
+router.get("/login", (req, res) => {
+  res.render("login");
 });
 
 
@@ -81,7 +82,25 @@ router.get('/pedidoClientes', async (req, res) => {
 });
 
 
+router.post('/carrinho/delete/:id', async (req, res) => {
+  const carrinhoItemId = req.params.id; // Obtém o ID do item no carrinho a ser excluído
+  try {
+    // Verifica se o item existe no carrinho
+    const carrinhoItem = await Carrinho.findByPk(carrinhoItemId);
+    if (!carrinhoItem) {
+      return res.status(404).json({ success: false, error: 'Item do carrinho não encontrado.' });
+    }
 
+    // Remove o item do carrinho
+    await carrinhoItem.destroy();
+
+    // Redireciona de volta para a página do carrinho
+    res.redirect('/carrinho');
+  } catch (error) {
+    console.error('Erro ao excluir item do carrinho:', error);
+    res.status(500).json({ success: false, error: 'Erro ao excluir item do carrinho.' });
+  }
+});
 
 router.post("/carrinho/enviar-pedido", async (req, res) => {
   const userId = req.session.userId; // Obtém o ID do usuário da sessão

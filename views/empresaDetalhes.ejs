@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Detalhes do Restaurante</title>
 </head>
 <body>
     <%- include('../views/components/header/headerCliente') %>
     <div class="container">
+        <form id="favoritoForm">
+            <input type="hidden" name="userId" id="userId" value="<%= userId %>">
+            <input type="hidden" name="empresaId" id="empresaId" value="<%= empresaId %>">
+            <button type="submit">Adicionar aos Favoritos</button>
+        </form>
+        
+        <a href="/homeCliente">Voltar para a lista de restaurantes</a>
         <h1><%= empresa.name %></h1>
         <p><%= empresa.cep %></p>
         <p>Endereço: <%= empresa.endereco %></p> <!-- Supondo que você tenha uma coluna 'address' -->
@@ -34,22 +43,60 @@
                 <p>Nenhum produto encontrado.</p>
             <% } %>
         </div>
-        <form action="/favoritos/adicionar" method="POST">
-            <input type="hidden" name="userId" value="<%= userId %>">
-            <input type="hidden" name="empresaId" value="<%= empresa.id %>">
-            <button type="submit">Adicionar aos Favoritos</button>
-        </form>
-        
-        <a href="/homeCliente">Voltar para a lista de restaurantes</a>
     </div> 
-
-    <style>
-        .container {
-            display: flex;
-            flex-direction: column;
-            padding: var(--padding-fixo);
-            gap: 20px;
-        }
-    </style>
 </body>
 </html>
+<script>
+ 
+ document.getElementById('favoritoForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const userId = document.getElementById('userId').value;
+    const empresaId = document.getElementById('empresaId').value;
+
+    console.log('userId:', userId);
+    console.log('empresaId:', empresaId);
+
+    try {
+        const response = await axios.post('/favoritos/adicionar', { userId, empresaId });
+
+        console.log('response:', response);
+
+        if (response.data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso',
+                text: response.data.message,
+            });
+        } else if (response.data.alreadyAdded) {
+            Swal.fire({
+                icon: 'info',
+                title: 'Atenção',
+                text: 'O restaurante já está nos seus favoritos.',
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: response.data.error,
+            });
+        }
+    } catch (error) {
+        console.error('Erro ao adicionar restaurante aos favoritos:', error);
+        if (error.response && error.response.data) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: error.response.data.error || 'Erro ao adicionar restaurante aos favoritos.',
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: 'Erro ao adicionar restaurante aos favoritos.',
+            });
+        }
+    }
+});
+
+</script>

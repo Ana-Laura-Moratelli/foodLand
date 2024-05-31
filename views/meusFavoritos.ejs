@@ -1,20 +1,75 @@
 <title>Meus Favoritos</title>
-    <body>
-        <!-- Incluir cabeçalho -->
-        <%- include('../views/components/header/headerCliente') %>
-        <div class="container">
-            <div>
-                <h1>Meus Favoritos</h1>
-                <ul>
-                    <% restaurantesFavoritos.forEach(restaurante => { %>
-                    <li><%= restaurante.name %>
-                        <form action="/favoritos/delete/<%= restaurante.id %>" method="POST" style="display:inline;">
-                            <button type="submit">Remover dos Favoritos</button>
-                        </form>
-                    </li>
-                    <% }) %>
-                </ul>
-            </div>
+<body>
+    <!-- Incluir cabeçalho -->
+    <%- include('../views/components/header/headerCliente') %>
+    <div class="container">
+        <div>
+            <h1>Meus Favoritos</h1>
+            <% if (restaurantesFavoritos && restaurantesFavoritos.length > 0) { %>
+            <ul>
+                <% restaurantesFavoritos.forEach(restaurante => { %>
+                <li><%= restaurante.name %>
+                    <form class="deleteFavoritoForm" data-restaurante-id="<%= restaurante.id %>" style="display:inline;">
+                        <button type="submit">Remover dos Favoritos</button>
+                    </form>
+                </li>
+                <% }) %>
+            </ul>
+            <% } else { %>
+                <p>Nenhum restaurante nos favoritos.</p>
+            <% } %>
         </div>
-    </body>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.deleteFavoritoForm').forEach(form => {
+                form.addEventListener('submit', async function(event) {
+                    event.preventDefault();
+
+                    const restauranteId = this.getAttribute('data-restaurante-id');
+
+                    Swal.fire({
+                        title: 'Remover dos Favoritos',
+                        text: "Deseja realmente remover este restaurante dos favoritos?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Sim, remover!',
+                        cancelButtonText: 'Cancelar'
+                    }).then(async (result) => {
+                        if (result.isConfirmed) {
+                            try {
+                                const response = await axios.post(`/favoritos/delete/${restauranteId}`, {});
+
+                                if (response.status === 200) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Removido!',
+                                        text: 'Restaurante removido dos favoritos com sucesso.',
+                                    }).then(() => {
+                                        // Recarregar a página para refletir a exclusão
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Erro',
+                                        text: 'Erro ao remover restaurante dos favoritos.',
+                                    });
+                                }
+                            } catch (error) {
+                                console.error('Erro ao remover restaurante dos favoritos:', error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Erro',
+                                    text: 'Erro ao remover restaurante dos favoritos.',
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
 </html>
