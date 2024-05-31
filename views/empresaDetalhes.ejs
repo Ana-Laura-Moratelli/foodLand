@@ -21,6 +21,13 @@
                         <h3><%= produto.name %></h3>
                         <p><%= produto.description %></p>
                         <p>Preço: R$<%= produto.preco %></p>
+                        <form action="/carrinho/add" method="POST">
+                            <input type="hidden" name="produtoId" value="<%= produto.id %>">
+                            <input type="hidden" name="userId" value="<%= userId %>"> <!-- Inclua o userId aqui -->
+                            <input type="hidden" name="empresaId" value="<%= empresa.id %>"> <!-- Inclua o empresaId aqui -->
+                            <input type="number" name="quantidade" value="1" min="1">
+                            <button type="submit">Adicionar ao Carrinho</button>
+                        </form>
                     </div>
                 <% }) %>
             <% } else { %>

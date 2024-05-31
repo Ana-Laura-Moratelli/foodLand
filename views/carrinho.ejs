@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho</title>
+</head>
+<body>
+    <%- include('../views/components/header/headerCliente') %>
+    <div class="container">
+        <div>
+            <h1>Meu carrinho</h1>
+            <% if (carrinhoItems && carrinhoItems.length > 0) { %>
+                <ul>
+                    <% carrinhoItems.forEach(item => { %>
+        
+                        <li>
+                            <p>Produto: <%= item.Produto ? item.Produto.name : 'Nome do Produto não encontrado' %></p>
+
+                            <p>Quantidade: <%= item.quantidade %></p>
+                            <p>Preço: R$<%= item.preco %></p>
+
+                            <form action="/carrinho/delete/<%= item.id %>" method="POST">
+                                <button type="submit">Excluir</button>
+                            </form>
+                            
+                        </li>
+                    <% }); %>
+                    
+                </ul>
+            <% } else { %>
+                <p>Nenhum item no carrinho.</p>
+            <% } %>
+        </div>
+    </div> 
+</body>
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-fixo);
+        gap: 20px;
+    }
+</style>
+</html>
