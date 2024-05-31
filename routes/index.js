@@ -332,8 +332,18 @@ router.post("/registerProduct", async (req, res) => {
   }
 });
 
-router.get("/", (req, res) => {
-  res.render("home", { titulo: "Home" });
+router.get("/", async (req, res) => {
+  try {
+    // Buscar todas as empresas no banco de dados
+    const empresas = await Empresa.findAll();
+    
+    // Renderizar a página "home" e passar as empresas para o template
+    res.render("home", { titulo: "Home", empresas });
+  } catch (error) {
+    console.error('Erro ao buscar empresas:', error);
+    res.status(500).send('Erro ao buscar empresas.');
+  }
+  
 });
 
 router.get("/homeEmpresa", (req, res) => {

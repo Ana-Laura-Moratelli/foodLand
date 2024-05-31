@@ -10,7 +10,10 @@
 <body>
     <%- include('../views/components/header/headerEmpresa') %>
     <h2>Bem-vindo, Empresa</h2>
-    <p>Cadastre um novo produto</p>
+    <h3>Cadastre um novo produto</h3>
+    <div class="forms">
+
+    
     <form id="productForm">
         <div>
             <label for="name">Nome do Produto</label>
@@ -26,7 +29,7 @@
         </div>
         <button type="submit">Cadastrar Produto</button>
     </form>
-    
+</div>
 
     <script>
         document.getElementById('productForm').addEventListener('submit', async (event) => {
@@ -63,3 +66,65 @@
     </script>
 </body>
 </html>
+<style>
+    h2, h3{
+        padding: var(--padding-fixo);
+        text-align: center;
+    }
+    .forms {
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+    .forms {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.forms label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+
+.forms input, .forms textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.forms button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.forms button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.forms a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.forms a:hover {
+    text-decoration: underline;
+}
+
+</style>

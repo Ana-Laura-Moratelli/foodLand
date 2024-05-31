@@ -1,35 +1,70 @@
 
 <title><%= titulo %></title>
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <body>
     <%- include('../views/components/header/header') %>
     <div class="container">
-        <div>
-            <p>Pesquisar restaunte</p>
-        </div>
-
+        <h1>Nossas Categorias</h1>
         <div class="containerCategoria">
-            <div>
-                Todos
+          
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    local_cafe
+                    </span>
+                Cafeterias
             </div>
-            <div>
-                Hamburgueria
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    lunch_dining
+                    </span>
+                Hamburguerias
             </div>
-            <div>
-                Pizza
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    local_pizza
+                    </span>
+                Pizzas
+            </div>
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    local_bar
+                    </span>
+                Bebidas
+            </div>
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    icecream
+                    </span>
+                Sorvetes
+            </div>
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    breakfast_dining
+                    </span>
+                Padarias
+            </div>
+            <div class="categoria">
+                <span class="material-symbols-outlined">
+                    dinner_dining
+                    </span>
+                Restaurantes
             </div>
         </div>
         <h2>Todos os restaurantes</h2>
         <div class="containerRestaurantes">
-            <div>
-                Restaurante 1
-            </div>
-            <div>
-                Restaurante 1
-            </div>
-            <div>
-                Restaurante 1
-            </div>
+            <% if (empresas && empresas.length > 0) { %>
+                <% empresas.forEach(empresa => { %>
+                    <div class="empresa">
+                            <p><%= empresa.name %></p>
+                            <p>Enrereço: <%= empresa.endereco %></p>
+                            <p>Número: <%= empresa.numero %></p>
+                            <p>Cep: <%= empresa.cep %></p>
+                        </a>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>Nenhum restaurante encontrado.</p>
+            <% } %>
         </div>
     </div> 
     
@@ -46,12 +81,32 @@
         flex-direction: row;
         justify-content: space-between;
     }
+    .categoria{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ECA457;
+    padding: 12px;
+    border-radius: 12px;
+    width: 200px;
+    
+}
+.empresa{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ECA457;
+    width: 250px;
+    text-align: center;
+    padding: 12px;
+    border-radius: 12px;
+}
     .containerRestaurantes{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         flex-wrap: wrap;
-
+        
     }
 </style>
 </html>

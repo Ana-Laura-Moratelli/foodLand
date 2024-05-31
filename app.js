@@ -30,7 +30,7 @@ const indexRouter = require('./routes/index');
 app.use('/', indexRouter);
 
 // Configuração de arquivos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // Sincronizar o banco de dados e iniciar o servidor
 db.sequelize.sync()
