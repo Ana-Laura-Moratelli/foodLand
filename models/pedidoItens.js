@@ -1,49 +1,37 @@
+// pedidoItens.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const User = require('./user');
 const Produto = require('./produto');
+const Pedido = require('./pedido');
 
-const Carrinho = sequelize.define('Carrinho', {
+const PedidoItem = sequelize.define('PedidoItem', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    userId: {
+    pedidoId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: User,
-            key: 'id'
-        }
     },
-    
     produtoId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Produto,
-            key: 'id'
-        }
-    },
-    empresaId: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
     quantidade: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 1
     },
     preco: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false
-    }
+        allowNull: false,
+    },
 }, {
-    tableName: 'Carrinho',
+    tableName: 'pedidoItens',
     timestamps: false
 });
 
-Carrinho.belongsTo(Produto, { foreignKey: 'produtoId' });
+PedidoItem.belongsTo(Produto, { foreignKey: 'produtoId' });
+PedidoItem.belongsTo(Pedido, { foreignKey: 'pedidoId' });
 
-module.exports = Carrinho;
+module.exports = PedidoItem;

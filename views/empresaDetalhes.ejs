@@ -34,6 +34,12 @@
                 <p>Nenhum produto encontrado.</p>
             <% } %>
         </div>
+        <form action="/favoritos/adicionar" method="POST">
+            <input type="hidden" name="userId" value="<%= userId %>">
+            <input type="hidden" name="empresaId" value="<%= empresa.id %>">
+            <button type="submit">Adicionar aos Favoritos</button>
+        </form>
+        
         <a href="/homeCliente">Voltar para a lista de restaurantes</a>
     </div> 
 

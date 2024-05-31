@@ -1,0 +1,35 @@
+<!-- meusFavoritos.ejs -->
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Meus Favoritos</title>
+    </head>
+    <body>
+        <!-- Incluir cabeçalho -->
+        <%- include('../views/components/header/headerCliente') %>
+        <div class="container">
+            <div>
+                <h1>Meus Favoritos</h1>
+                <ul>
+                    <% restaurantesFavoritos.forEach(restaurante => { %>
+                    <li><%= restaurante.name %>
+                        <form action="/favoritos/delete/<%= restaurante.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Remover dos Favoritos</button>
+                        </form>
+                    </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+    </body>
+    <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-fixo);
+        gap: 20px;
+    }
+</style>
+</html>
