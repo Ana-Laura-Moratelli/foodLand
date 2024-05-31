@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus Pedidos</title>
-</head>
+<title>Meus Pedidos</title>
 <body>
-    <!-- Incluir cabeçalho -->
     <%- include('../views/components/header/headerCliente') %>
     <div class="container">
         <div>
@@ -18,8 +11,6 @@
                     <div class="pedido">
                         <h3>Pedido #<%= pedido.id %></h3>
                         <p>Total: R$<%= pedido.total %></p>
-                       
-                        <!-- Adicione outras informações do pedido conforme necessário -->
                     </div>
                 <% }) %>
             <% } else { %>
@@ -28,17 +19,4 @@
         </div>
     </div>
 </body>
-<style>
-    .container {
-        display: flex;
-        flex-direction: column;
-        padding: var(--padding-fixo);
-        gap: 20px;
-    }
-    .pedido {
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-</style>
 </html>

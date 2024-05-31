@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  </head>
+<title>Cadastro</title>
   <body>
     <%- include('../views/components/header/header') %>
     <h2>Cadastro Cliente</h2>
@@ -67,66 +59,4 @@
         }
     });
   </script>
-  <style>
-    h2 {
-      padding: var(--padding-fixo);
-      text-align: center;
-    }
-    .forms {
-      align-items: center;
-      text-align: center;
-      gap: 10px;
-    }
-    .forms {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.forms label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-.forms input[type="name"],
-.forms input[type="email"],
-.forms input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-sizing: border-box;
-}
-
-.forms button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-}
-
-.forms button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-.forms a {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.forms a:hover {
-    text-decoration: underline;
-}
-
-  </style>
 </html>

@@ -1,11 +1,4 @@
-<!-- views/meusPedidosEmpresa.ejs -->
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos de Clientes</title>
-</head>
+<title>Pedidos de Clientes</title>
 <body>
     <%- include('../views/components/header/headerEmpresa') %>
     <div class="container">
@@ -25,46 +18,4 @@
         <% } %>
     </div>
 </body>
-<style>
-    .container {
-        display: flex;
-        flex-direction: column;
-        padding: var(--padding-fixo);
-        gap: 20px;
-    }
-    h2 {
-    text-align: center;
-    color: #333;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-h3 {
-    margin-top: 0;
-    color: #007bff;
-}
-
-p {
-    margin: 0;
-}
-
-p.cliente {
-    font-weight: bold;
-}
-
-p.total {
-    font-weight: bold;
-}
-</style>
 </html>

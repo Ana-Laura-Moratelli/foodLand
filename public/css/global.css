@@ -1,0 +1,185 @@
+:root {
+    --cor-fonte-black: #000000;
+    --cor-fonte-azul: #7EBDC3;
+    --cor-fundo-branco: #DFF2D8;
+    --cor-fundo-orange: #ECA457;
+    --cor-fundo-red: #84251E;
+    --padding-fixo: 20px 120px;
+    --border-radius: 10px;
+}
+    * {
+    font-family: Nunito Sans;
+    font-size: 20px;
+    font-style: normal;
+    padding: 0;
+    margin: 0;
+
+}
+.logo{
+    width: 100px;
+}
+    nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--cor-fundo-orange);
+    padding: 5px 120px;
+    align-items: center;
+
+}
+.buttonLogin{
+    display: flex;
+    gap: 20px;
+}
+button{
+    padding: 8px;
+    border-radius: 12px;
+    background-color: transparent;
+    font-size: 22px;
+  
+}
+.categoria{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+/* Forms */
+h2, h3 {
+    padding: var(--padding-fixo);
+    text-align: center;
+}
+.forms {
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+.forms {
+max-width: 400px;
+margin: 0 auto;
+padding: 20px;
+border: 1px solid #ccc;
+border-radius: 5px;
+background-color: #f9f9f9;
+}
+
+.forms label {
+display: block;
+margin-bottom: 5px;
+color: #333;
+}
+
+.forms input, textarea {
+width: 100%;
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid #ccc;
+border-radius: 3px;
+box-sizing: border-box;
+}
+
+.forms button[type="submit"] {
+width: 100%;
+padding: 10px;
+border: none;
+border-radius: 3px;
+background-color: #007bff;
+color: #fff;
+cursor: pointer;
+}
+
+.forms button[type="submit"]:hover {
+background-color: #0056b3;
+}
+
+.forms a {
+display: block;
+text-align: center;
+margin-top: 10px;
+color: #007bff;
+text-decoration: none;
+}
+
+.forms a:hover {
+text-decoration: underline;
+}
+
+/* Home Cliente */
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding-fixo);
+    gap: 20px;
+}
+.containerCategoria{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.containerRestaurantes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+
+
+/* Meus pedidos */
+.pedido {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+/* Meus Produtos */
+#produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.produto {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.produto h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.produto p {
+    margin-bottom: 10px;
+}
+/* Pedido Clientes */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+p {
+    margin: 0;
+}
+
+p.cliente {
+    font-weight: bold;
+}
+
+p.total {
+    font-weight: bold;
+}

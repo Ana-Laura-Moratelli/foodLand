@@ -1,13 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { User } = require("../models");
-const { Empresa } = require("../models");
-const { EmpresaProdutos } = require("../models");
-const { Produto } = require("../models"); // Ajuste o caminho conforme necessário
-const { Carrinho } = require("../models"); // Ajuste o caminho conforme necessário
-const { Pedido } = require("../models"); // Ajuste o caminho conforme necessário
-const { PedidoItem } = require("../models"); // Ajuste o caminho conforme necessário
-const { FavoritaEmpresa } = require('../models/');
+const { User, Empresa, EmpresaProdutos, Produto, Carrinho, Pedido, PedidoItem,    FavoritaEmpresa } = require("../models");
 
 router.post('/favoritos/adicionar', async (req, res) => {
   const { userId, empresaId } = req.body;
@@ -27,9 +20,10 @@ router.post('/favoritos/adicionar', async (req, res) => {
   }
 });
 // Rota para renderizar a página de login
-router.get("/login", (req, res) => {
-  res.render("login");
+app.get('/login', (req, res) => {
+  res.render('login');
 });
+
 
 router.post("/favoritos/delete/:empresaId", async (req, res) => {
   const userId = req.session.userId; // Obtém o ID do usuário da sessão
