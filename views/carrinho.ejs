@@ -1,4 +1,4 @@
-<title>Carrinho</title> 
+<title>Carrinho</title>
 <body>
     <%- include('../views/components/header/headerCliente') %>
     <div class="container">
@@ -7,7 +7,7 @@
             <% if (carrinhoItems && carrinhoItems.length > 0) { %>
                 <ul>
                     <% carrinhoItems.forEach(item => { %>
-                        <li>
+                        <li data-empresa-id="<%= item.empresaId %>">
                             <p>Produto: <%= item.Produto ? item.Produto.name : 'Nome do Produto não encontrado' %></p>
                             <p>Quantidade: <%= item.quantidade %></p>
                             <p>Preço: R$<%= item.preco %></p>
@@ -16,10 +16,10 @@
                             </form>
                         </li>
                     <% }); %>
-                    <form id="enviarPedidoForm" action="/carrinho/enviar-pedido" method="POST">
-                        <button type="submit">Enviar Pedido</button>
-                    </form>
                 </ul>
+                <form id="enviarPedidoForm" action="/carrinho/enviar-pedido" method="POST">
+                    <button type="submit">Enviar Pedido</button>
+                </form>
             <% } else { %>
                 <p>Nenhum item no carrinho.</p>
             <% } %>
@@ -28,6 +28,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Função para excluir itens do carrinho
             document.querySelectorAll('.deleteForm').forEach(form => {
                 form.addEventListener('submit', async function(event) {
                     event.preventDefault();
@@ -63,12 +64,25 @@
                     }
                 });
             });
-        });
 
-         // Enviar pedido
-         const enviarPedidoForm = document.getElementById('enviarPedidoForm');
+            // Enviar pedido
+            const enviarPedidoForm = document.getElementById('enviarPedidoForm');
             enviarPedidoForm.addEventListener('submit', async function(event) {
                 event.preventDefault();
+
+                const empresaIds = new Set();
+                document.querySelectorAll('li[data-empresa-id]').forEach(li => {
+                    empresaIds.add(li.getAttribute('data-empresa-id'));
+                });
+
+                if (empresaIds.size > 1) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: 'Não pode ter produtos de mais de uma empresa.'
+                    });
+                    return; // Impede o envio do formulário
+                }
 
                 try {
                     const response = await axios.post(enviarPedidoForm.action, {});
@@ -98,7 +112,7 @@
                     });
                 }
             });
-        
+        });
     </script>
 </body>
 </html>
