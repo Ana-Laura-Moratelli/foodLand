@@ -30,7 +30,7 @@
                         <h3><%= produto.name %></h3>
                         <p><%= produto.description %></p>
                         <p>Preço: R$<%= produto.preco %></p>
-                        <form action="/carrinho/add" method="POST">
+                        <form  class="addCarrinhoForm" action="/carrinho/add" method="POST">
                             <input type="hidden" name="produtoId" value="<%= produto.id %>">
                             <input type="hidden" name="userId" value="<%= userId %>"> <!-- Inclua o userId aqui -->
                             <input type="hidden" name="empresaId" value="<%= empresa.id %>"> <!-- Inclua o empresaId aqui -->
@@ -99,4 +99,44 @@
     }
 });
 
+// carrinho
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.addCarrinhoForm').forEach(form => {
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            try {
+                const response = await axios.post(this.action, data);
+
+                if (response.status === 200 && response.data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso',
+                        text: response.data.message || 'Produto adicionado ao carrinho com sucesso.',
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: response.data.error || 'Erro ao adicionar produto ao carrinho.',
+                    });
+                }
+            } catch (error) {
+                console.error('Erro ao adicionar produto ao carrinho:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    text: error.response?.data?.error || 'Erro ao adicionar produto ao carrinho.',
+                });
+            }
+        });
+    });
+});
 </script>

@@ -171,23 +171,25 @@ const totalPedido = carrinhoItems.reduce(
 
 
 
-router.get("/meusPedidos", async (req, res) => {
+router.get('/meusPedidos', async (req, res) => {
   const userId = req.session.userId; // Obtém o ID do usuário da sessão
   try {
-    // Aqui você pode recuperar os pedidos associados ao usuário
-    // Por exemplo, se você tiver um modelo Pedido, pode usar o método findAll para recuperar os pedidos do usuário
+    // Recupera os pedidos do usuário, incluindo os itens e produtos relacionados
+    const pedidos = await Pedido.findAll({
+      where: { userId },
+      include: {
+        model: PedidoItem,
+        include: Produto
+      }
+    });
 
-    // Supondo que você tenha uma lógica para recuperar os pedidos do usuário
-    const pedidos = await Pedido.findAll({ where: { userId } });
-
-    // Renderize a página "Meus Pedidos" com a lista de pedidos
-    res.render("meusPedidos", { pedidos });
+    // Renderiza a página "Meus Pedidos" com a lista de pedidos
+    res.render('meusPedidos', { pedidos });
   } catch (error) {
-    console.error("Erro ao buscar pedidos:", error);
-    res.status(500).json({ success: false, error: "Erro ao buscar pedidos." });
+    console.error('Erro ao buscar pedidos:', error);
+    res.status(500).json({ success: false, error: 'Erro ao buscar pedidos.' });
   }
 });
-
 // Rota para processar o login
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -223,9 +225,7 @@ router.post("/carrinho/add", async (req, res) => {
   try {
     const produto = await Produto.findByPk(produtoId);
     if (!produto) {
-      return res
-        .status(404)
-        .json({ success: false, error: "Produto não encontrado." });
+      return res.status(404).json({ success: false, error: "Produto não encontrado." });
     }
 
     const precoTotal = produto.preco * quantidade;
@@ -239,15 +239,13 @@ router.post("/carrinho/add", async (req, res) => {
       empresaId,
     });
 
-    res.redirect(`/empresa/${empresaId}`);
+    res.status(200).json({ success: true, message: "Produto adicionado ao carrinho com sucesso." });
   } catch (error) {
     console.error("Erro ao adicionar produto ao carrinho:", error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        error: "Erro ao adicionar produto ao carrinho.",
-      });
+    res.status(500).json({
+      success: false,
+      error: "Erro ao adicionar produto ao carrinho.",
+    });
   }
 });
 

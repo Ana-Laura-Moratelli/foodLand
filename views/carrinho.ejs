@@ -16,7 +16,7 @@
                             </form>
                         </li>
                     <% }); %>
-                    <form action="/carrinho/enviar-pedido" method="POST">
+                    <form id="enviarPedidoForm" action="/carrinho/enviar-pedido" method="POST">
                         <button type="submit">Enviar Pedido</button>
                     </form>
                 </ul>
@@ -64,6 +64,41 @@
                 });
             });
         });
+
+         // Enviar pedido
+         const enviarPedidoForm = document.getElementById('enviarPedidoForm');
+            enviarPedidoForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                try {
+                    const response = await axios.post(enviarPedidoForm.action, {});
+
+                    if (response.status === 200) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sucesso',
+                            text: 'Pedido enviado com sucesso.',
+                        }).then(() => {
+                            // Redirecionar ou recarregar a página
+                            window.location.href = '/meusPedidos';
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro',
+                            text: 'Erro ao enviar pedido.',
+                        });
+                    }
+                } catch (error) {
+                    console.error('Erro ao enviar pedido:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: 'Erro ao enviar pedido.',
+                    });
+                }
+            });
+        
     </script>
 </body>
 </html>

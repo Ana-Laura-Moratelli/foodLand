@@ -9,6 +9,7 @@
             <% if (pedidos && pedidos.length > 0) { %>
                 <% pedidos.forEach(pedido => { %>
                     <div class="pedido">
+                       
                         <h3>Pedido #<%= pedido.id %></h3>
                         <p>Total: R$<%= pedido.total %></p>
                     </div>
