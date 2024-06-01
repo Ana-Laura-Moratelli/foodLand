@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
 :root {
     --cor-fonte-black: #000000;
     --cor-fonte-azul: #7EBDC3;
     --cor-fundo-branco: #DFF2D8;
     --cor-fundo-orange: #ECA457;
+    --cor-fundo-orange2: #EE9B42;
     --cor-fundo-red: #84251E;
     --padding-fixo: 20px 120px;
     --border-radius: 10px;
@@ -31,25 +34,32 @@ nav {
 
 }
 
-.buttonLogin {
+.ContainerbuttonLogin {
     display: flex;
     gap: 20px;
 }
-
-button {
+.buttonLogin{
     padding: 8px;
-    border-radius: 12px;
-    background-color: transparent;
-    font-size: 22px;
-
+    background-color: #f9f9f9;
+    border: 1px solid #757474;
+    border-radius: 5px;
 }
-
+.buttonLogin:hover{
+    padding: 8px;
+    background-color: #cdcdcd;
+    border: 1px solid var(--cor-fundo-red);
+    border-radius: 5px;
+}
 .categoria {
     display: flex;
     align-items: center;
     flex-direction: column;
+    box-shadow: 5px 5px 5px rgba(7, 7, 7, 0.1);
+    border: 1px solid #ccc;
 }
-
+nav a:hover{
+    font-weight: bold;
+}
 /* Forms */
 h2 {
     padding: var(--padding-fixo);
@@ -92,20 +102,20 @@ textarea {
     padding: 10px;
     border: none;
     border-radius: 3px;
-    background-color: #007bff;
+    background-color: var(--cor-fundo-orange);
     color: #fff;
     cursor: pointer;
 }
 
 .forms button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: var(--cor-fundo-orange2);
 }
 
 .forms a {
     display: block;
     text-align: center;
     margin-top: 10px;
-    color: #007bff;
+    color: var(--cor-fundo-orange);
     text-decoration: none;
 }
 
@@ -133,7 +143,7 @@ textarea {
     flex-direction: column;
     background-color: #ECA457;
     padding: 12px;
-    border-radius: 12px;
+    border-radius: 5px;
     width: 200px;
 
 }
@@ -143,7 +153,7 @@ a {
     text-decoration: none; /* Remove o sublinhado */
 }
 .empresa:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    box-shadow: 10px 10px 10px rgba(7, 7, 7, 0.1);
 }
 .empresa {
     display: flex;
@@ -153,8 +163,10 @@ a {
     width: 250px;
     text-align: center;
     padding: 12px;
-    border-radius: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     text-decoration: none;
+    box-shadow: 5px 5px 5px rgba(7, 7, 7, 0.1);
 }
 
 .containerRestaurantes {
@@ -173,6 +185,11 @@ a {
     padding: 10px;
     margin-bottom: 10px;
 }
+.item{
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0 10px;
+}
 
 /* Meus Produtos */
 #produtos {
@@ -190,7 +207,7 @@ a {
 
 .produto h3 {
     margin-top: 0;
-    color: #007bff;
+    color: var(--cor-fundo-red);
 }
 
 .produto p {
@@ -213,7 +230,7 @@ li {
 
 h3 {
     margin-top: 0;
-    color: #007bff;
+    color: var(--cor-fundo-red);
 }
 
 p {
@@ -226,4 +243,55 @@ p.cliente {
 
 p.total {
     font-weight: bold;
+}
+/* Meus Favoritos */
+.containerFavs{
+    display: flex;
+    justify-content: space-between;
+}
+.buttonDelete{
+    background-color: transparent;
+    border: none;
+}
+.buttonDelete:hover{
+    color: var(--cor-fundo-red);
+}
+/* Empresa Detalhes */
+.voltar{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 24px;
+}
+.buttonFav{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+    background-color: var(--cor-fundo-orange);
+}
+.buttonFav:hover{
+    box-shadow: 5px 5px 5px rgba(7, 7, 7, 0.1);
+}
+#logout{
+    font-size: 32px;
+}
+.buttonCarrinho, .buttonEnviarPedido, .buttonExcluirCarrinho{
+    padding: 4px;
+    background-color: var(--cor-fundo-orange);
+}
+input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+.buttonCarrinho:hover, .buttonEnviarPedido:hover, .buttonExcluirCarrinho:hover{
+    box-shadow: 5px 5px 5px rgba(7, 7, 7, 0.1);
+}
+.liCarrinho p{
+    padding: 5px 0;
 }

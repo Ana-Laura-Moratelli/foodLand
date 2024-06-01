@@ -10,20 +10,25 @@
 <body>
     <%- include('../views/components/header/headerCliente') %>
     <div class="container">
+        <a class="voltar" href="/homeCliente"><span class="material-symbols-outlined">
+            arrow_back
+            </span> Voltar</a>
+        
+        <h1><%= empresa.name %></h1>
+        <p><%= empresa.cep %></p>
+        <p>Endereço: <%= empresa.endereco %></p> 
+        <p>Contato: <%= empresa.numero %></p> 
+
         <form id="favoritoForm">
             <input type="hidden" name="userId" id="userId" value="<%= userId %>">
             <input type="hidden" name="empresaId" id="empresaId" value="<%= empresaId %>">
-            <button type="submit">Adicionar aos Favoritos</button>
+            <button class="buttonFav" type="submit"> <span class="material-symbols-outlined">
+                favorite
+                </span>Adicionar aos Favoritos</button>
         </form>
         
-        <a href="/homeCliente">Voltar para a lista de restaurantes</a>
-        <h1><%= empresa.name %></h1>
-        <p><%= empresa.cep %></p>
-        <p>Endereço: <%= empresa.endereco %></p> <!-- Supondo que você tenha uma coluna 'address' -->
-        <p>Contato: <%= empresa.numero %></p> <!-- Supondo que você tenha uma coluna 'contact' -->
-        <!-- Adicione outros detalhes necessários aqui -->
-        <h2>Produtos</h2>
-        <div class="containerProdutos">
+        <h1>Produtos</h1>
+       
             <% if (produtos && produtos.length > 0) { %>
                 <% produtos.forEach(produto => { %>
                     <div class="produto">
@@ -32,17 +37,17 @@
                         <p>Preço: R$<%= produto.preco %></p>
                         <form  class="addCarrinhoForm" action="/carrinho/add" method="POST">
                             <input type="hidden" name="produtoId" value="<%= produto.id %>">
-                            <input type="hidden" name="userId" value="<%= userId %>"> <!-- Inclua o userId aqui -->
-                            <input type="hidden" name="empresaId" value="<%= empresa.id %>"> <!-- Inclua o empresaId aqui -->
+                            <input type="hidden" name="userId" value="<%= userId %>"> 
+                            <input type="hidden" name="empresaId" value="<%= empresa.id %>"> 
                             <input type="number" name="quantidade" value="1" min="1">
-                            <button type="submit">Adicionar ao Carrinho</button>
+                            <button class="buttonCarrinho" type="submit">Adicionar ao Carrinho</button>
                         </form>
                     </div>
                 <% }) %>
             <% } else { %>
                 <p>Nenhum produto encontrado.</p>
             <% } %>
-        </div>
+        
     </div> 
 </body>
 </html>

@@ -3,23 +3,27 @@
     <!-- Incluir cabeçalho -->
     <%- include('../views/components/header/headerCliente') %>
     <div class="container">
-        <div>
+       
             <h1>Meus Favoritos</h1>
             <% if (restaurantesFavoritos && restaurantesFavoritos.length > 0) { %>
+            
             <ul>
                 <% restaurantesFavoritos.forEach(restaurante => { %>
-                <li><%= restaurante.name %>
-                    <form class="deleteFavoritoForm" data-restaurante-id="<%= restaurante.id %>" style="display:inline;">
-                        <button type="submit">Remover dos Favoritos</button>
+                <li class="containerFavs"><%= restaurante.name %>
+                    <form class="deleteFavoritoForm" data-restaurante-id="<%= restaurante.id %>">
+                        <button class="buttonDelete" type="submit"><span class="material-symbols-outlined">
+                            delete
+                            </span></button>
                     </form>
                 </li>
                 <% }) %>
             </ul>
+        
             <% } else { %>
                 <p>Nenhum restaurante nos favoritos.</p>
             <% } %>
         </div>
-    </div>
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

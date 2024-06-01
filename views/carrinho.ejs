@@ -2,28 +2,28 @@
 <body>
     <%- include('../views/components/header/headerCliente') %>
     <div class="container">
-        <div>
+       
             <h1>Meu carrinho</h1>
             <% if (carrinhoItems && carrinhoItems.length > 0) { %>
                 <ul>
                     <% carrinhoItems.forEach(item => { %>
-                        <li data-empresa-id="<%= item.empresaId %>">
-                            <p>Produto: <%= item.Produto ? item.Produto.name : 'Nome do Produto não encontrado' %></p>
+                        <li class="liCarrinho" data-empresa-id="<%= item.empresaId %>">
+                            <h3>Produto: <%= item.Produto ? item.Produto.name : 'Nome do Produto não encontrado' %></h3>
                             <p>Quantidade: <%= item.quantidade %></p>
                             <p>Preço: R$<%= item.preco %></p>
                             <form class="deleteForm" data-item-id="<%= item.id %>">
-                                <button type="submit">Excluir</button>
+                                <button class="buttonExcluirCarrinho" type="submit">Excluir</button>
                             </form>
                         </li>
                     <% }); %>
                 </ul>
                 <form id="enviarPedidoForm" action="/carrinho/enviar-pedido" method="POST">
-                    <button type="submit">Enviar Pedido</button>
+                    <button class="buttonEnviarPedido" type="submit">Enviar Pedido</button>
                 </form>
             <% } else { %>
                 <p>Nenhum item no carrinho.</p>
             <% } %>
-        </div>
+      
     </div>
 
     <script>

@@ -5,27 +5,28 @@
         <div>
             <h1>Meus Pedidos</h1>
         </div>
-        <div class="pedidos">
+        <ul >
             <% if (pedidos && pedidos.length > 0) { %>
                 <% pedidos.forEach(pedido => { %>
-                    <div class="pedido">
+                    <li class="pedido">
                         <h3>Pedido #<%= pedido.id %></h3>
                         <p>Total: R$<%= pedido.total %></p>
-                        <div class="itens">
+                        <ul class="itens">
                             <% pedido.itens.forEach(item => { %>
-                                <div class="item">
+                                <li class="item">
                                     <p>Produto: <%= item.produto.name %></p>
                                     <p>Preço: R$<%= item.produto.preco %></p>
                                     <p>Quantidade: <%= item.quantidade %></p>
-                                </div>
+                                  
+                                </li>
                             <% }) %>
-                        </div>
-                    </div>
+                            </ul>
+                    </li>
                 <% }) %>
             <% } else { %>
                 <p>Nenhum pedido encontrado.</p>
             <% } %>
-        </div>
+            </ul>
     </div>
 </body>
 </html>
