@@ -4,9 +4,9 @@
     <div class="container">
        
             <h1>Meu carrinho</h1>
-            <% if (carrinhoItems && carrinhoItems.length > 0) { %>
+            <% if (carrinhoItens && carrinhoItens.length > 0) { %>
                 <ul>
-                    <% carrinhoItems.forEach(item => { %>
+                    <% carrinhoItens.forEach(item => { %>
                         <li class="liCarrinho" data-empresa-id="<%= item.empresaId %>">
                             <h3>Produto: <%= item.Produto ? item.Produto.name : 'Nome do Produto não encontrado' %></h3>
                             <p>Quantidade: <%= item.quantidade %></p>

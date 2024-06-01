@@ -3,7 +3,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
 const bodyParser = require('body-parser');
-const db = require('./models'); // Importe o arquivo index.js dos modelos
+const db = require('./models'); 
 const app = express();
 
 // Configuração do body-parser

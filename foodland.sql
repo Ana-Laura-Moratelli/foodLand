@@ -47,7 +47,7 @@ CREATE TABLE pedidos (
 );
 
 -- Tabela de Produtos em Pedidos
-CREATE TABLE pedidoItems (
+CREATE TABLE pedidoItens (
     id INT AUTO_INCREMENT PRIMARY KEY,
     pedidoId INT NOT NULL,
     produtoId INT NOT NULL,

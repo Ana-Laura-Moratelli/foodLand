@@ -1,8 +1,5 @@
-// pedidoItens.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const Produto = require('./produto');
-const Pedido = require('./pedido');
 
 const PedidoItem = sequelize.define('PedidoItem', {
     id: {

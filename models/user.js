@@ -17,8 +17,8 @@ const User = sequelize.define('User', {
     allowNull: false
   }
 }, {
-  tableName: 'users', // Especifica o nome da tabela
-  timestamps: false, // Desativa o controle de timestamp
+  tableName: 'users', 
+  timestamps: false, 
   hooks: {
     beforeCreate: async (user) => {
       const salt = await bcrypt.genSalt(10);

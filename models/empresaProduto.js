@@ -8,7 +8,7 @@ const EmpresaProdutos = sequelize.define('EmpresaProdutos', {
   empresaId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    primaryKey: true,  // Parte da chave primária composta
+    primaryKey: true, 
     references: {
       model: 'empresas',
       key: 'id'
@@ -17,7 +17,7 @@ const EmpresaProdutos = sequelize.define('EmpresaProdutos', {
   produtoId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    primaryKey: true,  // Parte da chave primária composta
+    primaryKey: true,  
     references: {
       model: 'produtos',
       key: 'id'
@@ -25,7 +25,7 @@ const EmpresaProdutos = sequelize.define('EmpresaProdutos', {
   }
 }, {
   tableName: 'EmpresaProdutos',
-  timestamps: false // Não necessita de `createdAt` e `updatedAt`
+  timestamps: false 
 });
 
 

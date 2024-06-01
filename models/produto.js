@@ -22,7 +22,7 @@ const Produto = sequelize.define('Produto', {
   }
 }, {
   tableName: 'Produtos',
-  timestamps: false // Controla automaticamente `createdAt` e `updatedAt`
+  timestamps: false 
 });
 
 Produto.associate = (models) => {

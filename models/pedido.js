@@ -1,10 +1,5 @@
-// pedidos.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const User = require('./user');
-const Empresa = require('./empresa');
-const PedidoItem = require('./pedidoItens');
-
 
 const Pedido = sequelize.define('Pedido', {
     id: {

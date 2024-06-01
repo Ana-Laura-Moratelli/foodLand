@@ -2,8 +2,6 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const bcrypt = require("bcryptjs");
 
-
-
 const Empresa = sequelize.define(
   "Empresa",
   {
@@ -45,8 +43,8 @@ const Empresa = sequelize.define(
     },
   },
   {
-    tableName: "empresas", // Especifica o nome da tabela
-    timestamps: false, // Desativa o controle de timestamp
+    tableName: "empresas", 
+    timestamps: false, 
     hooks: {
       beforeCreate: async (empresa) => {
         const salt = await bcrypt.genSalt(10);
@@ -62,11 +60,8 @@ Empresa.associate = (models) => {
     });
 };
 
-
 Empresa.prototype.validPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
-
-
 
 module.exports = Empresa;
