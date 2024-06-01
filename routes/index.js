@@ -71,7 +71,7 @@ router.get('/pedidoClientes', async (req, res) => {
           where: { empresaId },
           include: [
               { model: User, attributes: ['name', 'email'] },
-              { model: Empresa, attributes: ['name'] }
+              { model: PedidoItem, as: 'itens', include: { model: Produto, as: 'produto', attributes: ['name', 'preco'] } }
           ]
       });
       res.render('pedidoClientes', { pedidos });
@@ -80,7 +80,6 @@ router.get('/pedidoClientes', async (req, res) => {
       res.status(500).json({ success: false, error: 'Erro ao obter pedidos.' });
   }
 });
-
 
 router.post('/carrinho/delete/:id', async (req, res) => {
   const carrinhoItemId = req.params.id; // Obtém o ID do item no carrinho a ser excluído

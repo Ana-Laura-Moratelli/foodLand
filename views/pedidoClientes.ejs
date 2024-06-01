@@ -1,4 +1,9 @@
-<title>Pedidos de Clientes</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos de Clientes</title>
+</head>
 <body>
     <%- include('../views/components/header/headerEmpresa') %>
     <div class="container">
@@ -10,6 +15,18 @@
                         <h3>Pedido #<%= pedido.id %></h3>
                         <p>Cliente: <%= pedido.User.name %> (<%= pedido.User.email %>)</p>
                         <p>Total: R$<%= pedido.total %></p>
+                        <div class="itens">
+                            <h4>Itens do Pedido:</h4>
+                            <ul>
+                                <% pedido.itens.forEach(item => { %>
+                                    <li>
+                                        <p>Produto: <%= item.produto.name %></p>
+                                        <p>Quantidade: <%= item.quantidade %></p>
+                                        <p>Preço: R$<%= item.produto.preco %></p>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        </div>
                     </li>
                 <% }) %>
             </ul>
