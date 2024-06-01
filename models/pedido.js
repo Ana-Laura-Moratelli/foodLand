@@ -3,6 +3,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const User = require('./user');
 const Empresa = require('./empresa');
+const PedidoItem = require('./pedidoItens');
 
 
 const Pedido = sequelize.define('Pedido', {
@@ -28,8 +29,11 @@ const Pedido = sequelize.define('Pedido', {
     timestamps: false
 });
 
-Pedido.belongsTo(User, { foreignKey: 'userId' });
-Pedido.belongsTo(Empresa, { foreignKey: 'empresaId' });
+Pedido.associate = models => {
+    Pedido.belongsTo(models.User, { foreignKey: 'userId' });
+    Pedido.belongsTo(models.Empresa, { foreignKey: 'empresaId' });
+    Pedido.hasMany(models.PedidoItem, { foreignKey: 'pedidoId', as: 'itens' });
+};
 
 
 module.exports = Pedido;

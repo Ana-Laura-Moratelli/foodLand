@@ -1,4 +1,9 @@
-<title>Meus Pedidos</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meus Pedidos</title>
+</head>
 <body>
     <%- include('../views/components/header/headerCliente') %>
     <div class="container">
@@ -9,9 +14,17 @@
             <% if (pedidos && pedidos.length > 0) { %>
                 <% pedidos.forEach(pedido => { %>
                     <div class="pedido">
-                       
                         <h3>Pedido #<%= pedido.id %></h3>
                         <p>Total: R$<%= pedido.total %></p>
+                        <div class="itens">
+                            <% pedido.itens.forEach(item => { %>
+                                <div class="item">
+                                    <p>Produto: <%= item.produto.name %></p>
+                                    <p>Preço: R$<%= item.produto.preco %></p>
+                                    <p>Quantidade: <%= item.quantidade %></p>
+                                </div>
+                            <% }) %>
+                        </div>
                     </div>
                 <% }) %>
             <% } else { %>

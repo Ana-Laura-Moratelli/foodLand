@@ -31,7 +31,9 @@ const PedidoItem = sequelize.define('PedidoItem', {
     timestamps: false
 });
 
-PedidoItem.belongsTo(Produto, { foreignKey: 'produtoId' });
-PedidoItem.belongsTo(Pedido, { foreignKey: 'pedidoId' });
 
+PedidoItem.associate = models => {
+    PedidoItem.belongsTo(models.Produto, { foreignKey: 'produtoId', as: 'produto' });
+    PedidoItem.belongsTo(models.Pedido, { foreignKey: 'pedidoId', as: 'pedido' });
+};
 module.exports = PedidoItem;
