@@ -140,37 +140,38 @@ router.post("/carrinho/enviar-pedido", async (req, res) => {
     if (carrinhoItens.length === 0) {
       return res.status(400).json({
         success: false,
-        error:
-          "Carrinho vazio. Adicione itens ao carrinho antes de enviar o pedido.",
+        error: "Carrinho vazio. Adicione itens ao carrinho antes de enviar o pedido.",
       });
     }
+
     const empresaId = carrinhoItens[0].empresaId;
     for (let i = 1; i < carrinhoItens.length; i++) {
       if (carrinhoItens[i].empresaId !== empresaId) {
         return res.status(400).json({
           success: false,
-          error:
-            "Não é possível enviar um pedido com itens de empresas diferentes.",
+          error: "Não é possível enviar um pedido com itens de empresas diferentes.",
         });
       }
     }
 
-    const totalPedido = carrinhoItens.reduce(
-      (total, item) => total + item.preco * item.quantidade,
-      0
-    );
+    const precoTotal = carrinhoItens.reduce((total, item) => {
+      return total + parseFloat(item.preco);
+    }, 0);
+
+    // Format the total price to a fixed number of decimal places
+    const precoTotalFormatado = precoTotal.toFixed(2);
 
     const novoPedido = await Pedido.create({
       userId,
       empresaId,
-      total: totalPedido,
+      total: precoTotalFormatado,
     });
 
     await Promise.all(
       carrinhoItens.map(async (item) => {
         await PedidoItem.create({
           pedidoId: novoPedido.id,
-          empresaId: item.empresaId, 
+          empresaId: item.empresaId,
           produtoId: item.produtoId,
           quantidade: item.quantidade,
           preco: item.preco,
@@ -187,6 +188,7 @@ router.post("/carrinho/enviar-pedido", async (req, res) => {
     res.status(500).json({ success: false, error: "Erro ao enviar pedido." });
   }
 });
+
 
 router.get("/meusPedidos", async (req, res) => {
   const userId = req.session.userId; 

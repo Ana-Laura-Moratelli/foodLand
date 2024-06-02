@@ -15,9 +15,9 @@
             </span> Voltar</a>
         
         <h1><%= empresa.name %></h1>
-        <p><%= empresa.cep %></p>
+        <p>Cep: <%= empresa.cep %></p>
         <p>Endereço: <%= empresa.endereco %></p> 
-        <p>Contato: <%= empresa.numero %></p> 
+        <p>Contato: (12)<%= empresa.numero %></p> 
 
         <form id="favoritoForm">
             <input type="hidden" name="userId" id="userId" value="<%= userId %>">
